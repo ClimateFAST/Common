@@ -75,4 +75,29 @@ public class Dimension {
     void setSize(long size) {
         this.size = size;
     }
+
+     @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        toString(sb);
+        return sb.toString();
+    }
+
+    public void toString(StringBuilder sb) {
+        sb.append("Dimension(\n");
+        toStringFields(sb);
+        sb.append(")");
+    }
+
+    protected void toStringFields(StringBuilder sb) {
+        sb.append("name: ");
+        sb.append(this.name);
+        sb.append('\n');        
+        sb.append("unlimited?: ");
+        sb.append(this.unlimited);
+        sb.append('\n');
+        sb.append("size: ");
+        sb.append(this.size);
+        sb.append('\n');
+    }
 }

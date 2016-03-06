@@ -90,6 +90,13 @@ public class MetadataBuilder {
         Set<String> consts = new HashSet<>();
         HashMap<String, String> attrs;
         MetadataBuilder mb = new MetadataBuilder();
+        
+        ArrayListMultimap<String, Dimension> dimensions = ArrayListMultimap.create();
+        for (Metadata mi : metas) {
+            for (Dimension dim : mi.getDimensions()) {
+                dimensions.put(dim.getName(), dim);
+            }
+        }
         Metadata m0 = metas.get(0);
         for (Variable v : m0.getVariables()) {
             mb.addVariable(v);
@@ -100,12 +107,8 @@ public class MetadataBuilder {
             consts.add(c.getStandardName());
         }
         attrs = new HashMap<>(m0.getAttributes());
-        ArrayListMultimap<String, Dimension> dimensions = ArrayListMultimap.create();
         for (int i = 1; i < metas.size(); i++) {
             Metadata mi = metas.get(i);
-            for (Dimension dim : mi.getDimensions()) {
-                dimensions.put(dim.getName(), dim);
-            }
             for (Variable v : mi.getVariables()) {
                 if (!vars.contains(v.getStandardName())) {
                     LOG.warn("During merge: Variable {} not present in all files!", v.getStandardName());
@@ -135,6 +138,14 @@ public class MetadataBuilder {
             Collection<Dimension> dims = e.getValue();
             if (dims.size() != metas.size()) {
                 LOG.warn("During merge: Dimension {} not present in all files!", name);
+//                System.out.println("Collected Dims: ");
+//                for (Dimension d : dims) {
+//                    System.out.println(d);
+//                }
+//                System.out.println("Metas: ");
+//                for (Metadata m : metas) {
+//                    System.out.println(m);
+//                }
             }
             Dimension dim0 = dims.iterator().next();
             if (dim0.isUnlimited()) { // merge sizes

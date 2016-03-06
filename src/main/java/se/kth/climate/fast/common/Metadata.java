@@ -17,7 +17,6 @@
  */
 package se.kth.climate.fast.common;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import org.apache.avro.Schema;
 import org.apache.avro.reflect.ReflectData;
@@ -89,8 +88,11 @@ public class Metadata {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Metadata {\n");
-        sb.append("coordinates: ");
-        sb.append(Arrays.toString(dimensions));
+        sb.append("dimensions: ");
+        for (Dimension d : dimensions) {
+            d.toString(sb);
+            sb.append('\n');
+        }
         sb.append('\n');
         sb.append("variables: [\n");
         for (Variable v : variables) {

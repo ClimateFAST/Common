@@ -28,27 +28,27 @@ public class DimensionBuilder {
     /**
      * @param name the name to set
      */
-    void setName(String name) {
+    public void setName(String name) {
         d.setName(name);
     }
 
     /**
      * @param unlimited the unlimited to set
      */
-    void setUnlimited(boolean unlimited) {
+    public void setUnlimited(boolean unlimited) {
         d.setUnlimited(unlimited);
     }
 
     /**
      * @param size the size to set
      */
-    void setSize(long size) {
+    public void setSize(long size) {
         d.setSize(size);
     }
     
     public Dimension build() {
         Dimension r = d;
         d = new Dimension();
-        return d;
+        return r;
     }
 }

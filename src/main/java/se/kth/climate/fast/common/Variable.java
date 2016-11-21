@@ -146,6 +146,10 @@ public class Variable {
     public HashMap<String, String> getAttributes() {
         return attributes;
     }
+    
+    public String getAttribute(String key) {
+        return attributes.get(key);
+    }
 
     /**
      * @param attributes the attributes to set

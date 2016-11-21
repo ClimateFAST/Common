@@ -26,14 +26,15 @@ import java.nio.ByteBuffer;
 public class Constant extends Variable {
 
     private byte[] value;
+    private String readable;
 
     /**
      * no param constr for AVRO
      */
     public Constant() {
-        
+
     }
-    
+
     Constant(Variable var) {
         super(var);
     }
@@ -50,6 +51,14 @@ public class Constant extends Variable {
      */
     public void setValue(byte[] value) {
         this.value = value;
+    }
+
+    public void setReadable(String rep) {
+        this.readable = rep;
+    }
+
+    public String getReadable() {
+        return this.readable;
     }
 
     public double getAsDouble() {

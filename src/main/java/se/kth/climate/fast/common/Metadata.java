@@ -38,8 +38,26 @@ public class Metadata {
         this.variables = vars;
     }
 
-    Variable[] getVariables() {
+    public Variable[] getVariables() {
         return variables;
+    }
+
+    public Variable findVariable(String name) {
+        for (Variable v : variables) {
+            if (v.getStandardName().equals(name)
+                    || v.getShortName().equals(name)
+                    || v.getLongName().equals(name)) {
+                return v;
+            }
+        }
+        for (Constant c : constants) {
+            if (c.getStandardName().equals(name)
+                    || c.getShortName().equals(name)
+                    || c.getLongName().equals(name)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     /**
@@ -62,6 +80,10 @@ public class Metadata {
     public HashMap<String, String> getAttributes() {
         return attributes;
     }
+    
+    public String getAttribute(String key) {
+        return attributes.get(key);
+    }
 
     /**
      * @param attributes the attributes to set
@@ -75,6 +97,15 @@ public class Metadata {
      */
     public Dimension[] getDimensions() {
         return dimensions;
+    }
+    
+    public Dimension findDimension(String name) {
+        for (Dimension d : dimensions) {
+            if (d.getName().equals(name)) {
+                return d;
+            }
+        }
+        return null;
     }
 
     /**
